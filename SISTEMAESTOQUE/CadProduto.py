@@ -19,20 +19,6 @@ class Usuario:
     @cpf.setter
     def nome(self, numcpf):
         self._cpf=cpf
-        
-class CadFuncionario(Usuario):
-    
-    def __init__(self,nome, cpf, cod):
-        super().__init__(nome, cpf)
-        self._cod=cod
-        
-    @property
-    def cod(self):
-        return self._cod
-
-    @cod.setter
-    def cod(self,cod2):
-        self._cod= cod
 
 
 
@@ -70,7 +56,30 @@ class Produto:
     def add_produto(self, num):
         self._quant+=num
         
-            
-    
+    def venda(self,cliente,funcionario,produto, quantidade,quant):
+        
+        self._cliente= cliente
+        self._funcionario= funcionario
+        self._produto= produto
+        self._quantidade= quantidade
+        
+        if self._quantidade > self._quant:
+            print('Quantidade indisponivel no estoque')
+        else:
+            self._quant= self._quant - self._quantidade 
+            print('Venda Efetuada')
 
-   
+class CadFuncionario(Usuario):
+    
+    def __init__(self,nome, cpf,cod):
+        super().__init__(nome, cpf)
+        self._cod=cod
+        
+    @property
+    def cod(self):
+        return self._cod
+
+    @cod.setter
+    def cod(self,cod2):
+        self._cod= cod
+        
