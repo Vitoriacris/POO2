@@ -83,3 +83,22 @@ class CadFuncionario(Usuario):
     def cod(self,cod2):
         self._cod= cod
         
+
+pao= Produto(1234,"Pão",2)
+print(pao._quant)
+
+funcionario1 = CadFuncionario('Maria',694000,123)
+print(funcionario1._nome)
+
+funcionario2 = CadFuncionario('Joao',694001,321)
+print(funcionario2._nome)
+
+pao.add_produto(4)
+print(pao._quant)
+
+cliente1 = Usuario('Luana',6750111)
+print(cliente1._nome)
+
+
+pao.venda(cliente1,funcionario1,pao,4,pao._quant)
+print(pao._quant)
