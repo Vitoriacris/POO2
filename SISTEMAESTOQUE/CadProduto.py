@@ -1,9 +1,8 @@
 
 class Usuario:
-    def __init__(self, nome, cpf):
-        self._nome = nome
-        self._cpf = cpf
-
+    def __init__(self):
+        self._nome = input('Nome:')
+        self._cpf = input('CPF:')
 
     @property
     def nome(self):
@@ -18,22 +17,16 @@ class Usuario:
         return self._cpf
 
     @cpf.setter
-    def nome(self, numcpf):
+    def cpf(self, numcpf):
         self._cpf = self._cpf
-
-    def cad(self):
-        nome = input(print('Insira o nome:'))
-
 
 class Produto:
 
-    def __init__(self, codigo_produto, descricao, quant):
-        self._codigo_produto = codigo_produto
-        self._descricao = descricao
-        self._quant = quant
-        print('=-' * 20)
-        print('Produto Cadastrado!')
-
+    def __init__(self, listaProdutos=0):
+        self._codigo_produto = input("Codigo: ")
+        self._descricao = input("Nome do produto: ")
+        self._quant = input("Quantas unidades: ")
+        self._valor = input("Valor da unidade: ")
 
     @property
     def codigo_produto(self):
@@ -59,12 +52,6 @@ class Produto:
     def quant(self, quant2):
         self._quant = self._quant
 
-    def add_produto(self, num):
-        self._quant += num
-        print('=-' * 20)
-        print(f'{num} novas unidades foram adicionadas\nAo Produto do tipo: {self._descricao}')
-        print(f'Agora o estoque desse produto tem: {self._quant} unidades')
-
     def venda(self, cliente, funcionario, produto, quantidade, quant):
 
         self._cliente = cliente
@@ -86,11 +73,13 @@ class Produto:
 
 class CadFuncionario(Usuario):
 
-    def __init__(self, nome, cpf, cod):
-        super().__init__(nome, cpf)
-        self._cod = cod
+    def __init__(self):
+        self._nome = input('Nome:')
+        self._cpf = input('CPF:')
+        self._cod= input('Codigo: ')
+
         print('=-' * 20)
-        print(f'Funcinario(a) {self._nome} Cadastrado(a)')
+        print(f'Funcinario(a) {self._nome} Cadastrado(a)') 
 
     @property
     def cod(self):
@@ -100,21 +89,48 @@ class CadFuncionario(Usuario):
     def cod(self, cod2):
         self._cod = self._cod
 
-
-
 #teste
-pao = Produto(1234,"Pão",2)
 
-funcionario1 = CadFuncionario('Maria',694000,123)
+print('Sistema de estoque')
+print('Escolha uma opção: ')
+print('[1] Cadastrar Produto')
+print('[2] Cadastrar Funcionario')
+print('[3] Cadastrar Cliente')
+print('[4] Realizar Venda')
+print('[5] Repor estoque')
+menu = input()
+
+if menu == '1':
+    Produto()
+    print('=-' * 20)
+    print('Produto Cadastrado!')
+elif menu == '2':
+    Funcionario1 = CadFuncionario()
+elif menu == '3':
+    cliente1 = Usuario()
+elif menu == '4':
+    print('Opção Invalida')
+elif menu == '5':
+    print('Opção Invalida')
+else:
+    print('Opção Invalida')
 
 
-funcionario2 = CadFuncionario('Joao',694001,321)
+
+#funcionario2 = CadFuncionario(321)
+
+#pao.add_produto(4)
+
+#print(cliente1._nome)
 
 
-pao.add_produto(4)
 
 
-cliente1 = Usuario('Luana',6750111)
-print(cliente1._nome)
 
-pao.venda(cliente1,funcionario1,pao,4,pao._quant)
+
+
+
+
+
+
+
