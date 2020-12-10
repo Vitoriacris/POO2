@@ -39,23 +39,14 @@ class CadFuncionario(Usuario):
 class Estoque:
     def __init__(self):
         self.listaProduto = []
-
+        print(self.listaProduto)
 class Produto():
-    def __init__(self):
+    def __init__(self,descricao=0, codigo_produto=0, quant=0, valor=0):
+        self._descricao = descricao
+        self._codigo_produto = codigo_produto
+        self._quant = quant
+        self._valor = valor
 
-        self.estoque = Estoque()
-
-        self._descricao = input("Nome do produto: ")
-
-        self._codigo_produto = input("Codigo de ID: ")
-
-        self._quant = input("Quantas unidades: ")
-
-        self._valor = input("Valor da unidade: ")
-
-        self.estoque.listaProduto.append([self._descricao, self._codigo_produto, self._quant, self._valor])
-
-        print(self.estoque.listaProduto)
 
     @property
     def codigo_produto(self):
@@ -101,7 +92,7 @@ class Produto():
 
 
 # Menu
-
+estoque = Estoque()
 menu = 1111
 
 while menu != 0:
@@ -116,11 +107,14 @@ while menu != 0:
     menu = input()
 
     if menu == '1':
-        Produto()
+        Produto._descricao= input('Nome do produto:')
+        Produto._codigo_produto= input("Codigo de ID: ")
+        Produto._quant = input("Quantas unidades: ")
+        Produto._valor = input("Valor da unidade: ")
+        estoque.listaProduto.append(Produto._descricao)
         print('=-' * 20)
         print('Produto Cadastrado!')
-        print(Estoque.imp())
-
+        print(estoque.listaProduto)
     elif menu == '2':
         CadFuncionario()
         print('=-' * 20)
