@@ -19,6 +19,7 @@ class Usuario:
     def cpf(self, numcpf):
         self._cpf = self._cpf
 
+
 class CadFuncionario(Usuario):
 
     def __init__(self):
@@ -34,18 +35,27 @@ class CadFuncionario(Usuario):
     def cod(self, cod2):
         self._cod = self._cod
 
-class Produto:
+
+class Estoque:
     def __init__(self):
         self.listaProduto = []
-        self._descricao = input("Nome do produto: ")
-        self.listaProduto.append([self._descricao])
 
-        self._codigo_produto= input("Codigo de ID: ")
-        self.listaProduto.append([self._codigo_produto])
-        print(self.listaProduto)
+class Produto():
+    def __init__(self):
+
+        self.estoque = Estoque()
+
+        self._descricao = input("Nome do produto: ")
+
+        self._codigo_produto = input("Codigo de ID: ")
 
         self._quant = input("Quantas unidades: ")
+
         self._valor = input("Valor da unidade: ")
+
+        self.estoque.listaProduto.append([self._descricao, self._codigo_produto, self._quant, self._valor])
+
+        print(self.estoque.listaProduto)
 
     @property
     def codigo_produto(self):
@@ -71,7 +81,6 @@ class Produto:
     def quant(self, quant2):
         self._quant = self._quant
 
-
     def venda(self, cliente, funcionario, produto, quantidade, quant):
 
         self._cliente = cliente
@@ -93,37 +102,43 @@ class Produto:
 
 # Menu
 
-print('Sistema de estoque')
-print('Escolha uma opção: ')
-print('[1] Cadastrar Produto')
-print('[2] Cadastrar Funcionario')
-print('[3] Cadastrar Cliente')
-print('[4] Realizar Venda')
-print('[5] Repor estoque')
+menu = 1111
 
-menu = input()
+while menu != 0:
+    print('Sistema de estoque')
+    print('Escolha uma opção: ')
+    print('[1] Cadastrar Produto')
+    print('[2] Cadastrar Funcionario')
+    print('[3] Cadastrar Cliente')
+    print('[4] Realizar Venda')
+    print('[5] Repor estoque')
+    print('[0] SAIR')
+    menu = input()
 
-if menu == '1':
-    Produto()
-    print('=-' * 20)
-    print('Produto Cadastrado!')
+    if menu == '1':
+        Produto()
+        print('=-' * 20)
+        print('Produto Cadastrado!')
+        print(Estoque.imp())
 
+    elif menu == '2':
+        CadFuncionario()
+        print('=-' * 20)
+        print(f'Funcinario(a) Cadastrado(a)')
 
-elif menu == '2':
-    CadFuncionario()
-
-    print('=-' * 20)
-    print(f'Funcinario(a) Cadastrado(a)')
-elif menu == '3':
-    Usuario()
-    print('=-' * 20)
-    print(f'Cliente Cadastrado')
-elif menu == '4':
-    print('Opção Invalida')
-elif menu == '5':
-    print('Opção Invalida')
-else:
-    print('Opção Invalida')
+    elif menu == '3':
+        Usuario()
+        print('=-' * 20)
+        print(f'Cliente Cadastrado')
+    elif menu == '4':
+        print('Opção Invalida')
+    elif menu == '5':
+        print('Opção Invalida')
+    elif menu == '0':
+        menu = False
+        print('Até logo!')
+    else:
+        print('Opção Invalida')
 
 # funcionario2 = CadFuncionario(321)
 
