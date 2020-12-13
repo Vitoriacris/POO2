@@ -1,3 +1,8 @@
+listaProduto = []
+var = 1
+q = 1
+
+
 class Usuario:
     def __init__(self, nome=0, cpf=0):
         self._nome = nome
@@ -22,10 +27,9 @@ class Usuario:
 
 class CadFuncionario(Usuario):
 
-    def __init__(self,nome=0, cod=0):
+    def __init__(self, nome=0, cod=0):
         self._nome = nome
         self._cod = cod
-
 
     @property
     def cod(self):
@@ -36,17 +40,9 @@ class CadFuncionario(Usuario):
         self._cod = self._cod
 
 
-class Lista:
-    def __init__(self):
-        self.listaProduto = []
-        self.listFun = []
-        self.listCli = []
-
-
 class Produto():
-    def __init__(self, descricao=0, codigo_produto=0, quant=0, valor=0):
+    def __init__(self, descricao=0, quant=0, valor=0):
         self._descricao = descricao
-        self._codigo_produto = codigo_produto
         self._quant = quant
         self._valor = valor
 
@@ -74,92 +70,128 @@ class Produto():
     def quant(self, quant2):
         self._quant = self._quant
 
-    def venda(self, cliente, funcionario, produto, quantidade, quant):
 
-        self._cliente = cliente
-        self._funcionario = funcionario
-        self._produto = produto
-        self._quantidade = quantidade
-
-        if self._quantidade > self._quant:
-            print('=-' * 20)
-            print('Quantidade indisponivel no estoque')
-        else:
-            self._quant = self._quant - self._quantidade
-            print('=-' * 20)
-            print(f'Venda Efetuada!')
-            print(f'Produto: {self._descricao}')
-            print(f'Vendedor(a): {funcionario._nome}')
-            print(f'Cliente: {cliente._nome}')
+fun = list()
+listCli = list()
 
 
-class addProduto(Produto):
-    def __init__(self):
-        num = input('Quantas Unidades deseja repor: ')
-        self._quant += num
-        estoque.listaProduto.insert(2,self.quant)
+class Menu(CadFuncionario):
+    def __init__(self, quant=0):
+        super().__init__(quant)
+        menu = 1
+
+        while menu != '0':
+            print('----------------------')
+            print('===Sistema de estoque===')
+            print('----------------------')
+            print('[1] Produto')
+            print('[2] Funcionario')
+            print('[3] Cadastrar Cliente')
+            print('[4] Realizar Venda')
+            print('[0] SAIR')
+            print('Escolha uma opção: ')
+            menu = input()
+
+            if menu == '1':
+                print('[1] CADASTRAR Produto: ')
+                print('[2] EXCLUIR Produto')
+                print('[3] REPOR ESTOQUE')
+                print('[4] LISTA DE PRODUTOS DISPONIVEIS')
+                funcio = input(' ')
+                if funcio == '1':
+                    self._descricao = input('Nome do produto:')
+                    self._quant = input("Quantas unidades: ")
+                    self._valor = input("Valor da unidade: ")
+
+                    listaProduto.append(self._descricao)
+                    listaProduto.append(self._quant)
+                    listaProduto.append(self._valor)
+
+                    print('=-' * 20)
+                    print('Produto Cadastrado!', listaProduto)
+
+                elif funcio == '2':
+                    self._descricao = input('Nome do Produto: ')
+                    self._quant = input('Unidades disponiveis:')
+                    self._valor = input('Valor: ')
+
+                    if self._descricao in listaProduto and self._quant in listaProduto and self._valor in listaProduto:
+                        listaProduto.remove(self._descricao)
+                        listaProduto.remove(self._quant)
+                        listaProduto.remove(self._valor)
+                        print('PRODUTO EXCLUIDO', listaProduto)
+
+                elif funcio == '3':
+                    self._descricao = input('Nome do Produto: ')
+                    self._quant = quant = (input('Unidades disponiveis:'))
+                    self._valor = input('Valor: ')
+
+                    if self._descricao in listaProduto and self._quant in listaProduto and self._valor in listaProduto:
+                        listaProduto.remove(quant)
+                        num = (input('Quantas Unidades deseja repor: '))
+                        tot = int(quant + num)
+                        listaProduto.append(tot)
+
+                elif funcio == '4':
+                    print(listaProduto)
+
+            elif menu == '2':
+                print('[1] CADASTRAR FUNCIONARIO: ')
+                print('[2] EXCLUIR FUNCIONARIO')
+                funcio = input(' ')
+
+                if funcio == '1':
+                    self._nome = input('Nome: ')
+                    self._cod = input('Codigo:')
+                    fun.append(self._nome)
+                    fun.append(self._cod)
+                    print('=-' * 20)
+                    print(f'Funcinario(a) Cadastrado(a)')
+                    print(fun)
+
+                elif funcio == '2':
+                    self._nome = input('Nome: ')
+                    self._cod = input('Codigo:')
+
+                    if self._nome in fun and self._cod in fun:
+                        fun.remove(self._nome)
+                        fun.remove(self._cod)
+                    print('Funcionario Removido', fun)
+
+            elif menu == '3':
+
+                Usuario._nome = input('Nome: ')
+                Usuario._cpf = input('CPF: ')
+                listCli.append(Usuario._nome)
+                listCli.append(Usuario._cpf)
+                print('=-' * 20)
+                print(f'Cliente Cadastrado')
+
+            elif menu == '4':
+                self._cod = input('Insira o codigo do vendedor:')
+                if self._cod in fun:
+                    self._nome = input('Nome do cliente:')
+
+                    if self._nome in listCli:
+                        self._descricao = input('Nome do produto que será vendido:')
+                        q = input('Quantas unidades deseja vender:')
+
+                        if self._descricao in listaProduto:
+
+                            if self._quant <= q:
+                                var = self._quant - q
+                                listaProduto.append(var)
+                                listaProduto.remove(self._quant)
+                            else:
+                                print('Quantidade indisponivel no estoque')
+                        else:
+                            print('Produto nao disponivel no estoque')
+                    else:
+                        print('Cliente não cadastrado!')
+                else:
+                    print('Funcionario não consta no sistema!')
+
+        print('Até Logo...')
 
 
-# Menu
-
-estoque = Lista()
-fun = Lista()
-cli= Lista()
-lista2 = []
-menu = 1
-while menu != '0':
-    print('Sistema de estoque')
-    print('Escolha uma opção: ')
-    print('[1] Cadastrar Produto')
-    print('[2] Cadastrar Funcionario')
-    print('[3] Cadastrar Cliente')
-    print('[4] Realizar Venda')
-    print('[5] Repor estoque')
-    print('[0] SAIR')
-    menu = input()
-
-    if menu == '1':
-        Produto._descricao = input('Nome do produto:')
-        Produto._codigo_produto = input("Codigo de ID: ")
-        Produto._quant = input("Quantas unidades: ")
-        Produto._valor = input("Valor da unidade: ")
-        estoque.listaProduto.append(Produto._descricao)
-        estoque.listaProduto.append(Produto._codigo_produto)
-        estoque.listaProduto.append(Produto._quant)
-        print('=-' * 20)
-        print('Produto Cadastrado!')
-        print(estoque.listaProduto)
-
-    elif menu == '2':
-        CadFuncionario._nome= input('Nome: ')
-        CadFuncionario._cod= input('Codigo:')
-        fun.listFun.append(CadFuncionario._nome)
-        fun.listFun.append(CadFuncionario._cod)
-        print('=-' * 20)
-        print(f'Funcinario(a) Cadastrado(a)')
-        print(fun.listFun)
-
-    elif menu == '3':
-        Usuario._nome= input('Nome: ')
-        Usuario._cpf= input('CPF: ')
-        cli.listCli.append(Usuario._nome)
-        cli.listCli.append(Usuario._cpf)
-        print('=-' * 20)
-        print(f'Cliente Cadastrado')
-
-    elif menu == '4':
-        print('Opção Invalida')
-
-    elif menu == '5':
-        p = input('Digite o codigo do produto que desejar repor: ')
-        if p in estoque.listaProduto:
-            addProduto()
-            print(estoque.listaProduto)
-
-print('Até Logo...')
-# funcionario2 = CadFuncionario(321)
-
-# pao.add_produto(4)
-
-# print(cliente1._nome)
-415
+Menu()
