@@ -2,7 +2,6 @@ listaProduto = []
 var = 1
 q = 1
 
-
 class Usuario:
     def __init__(self, nome=0, cpf=0):
         self._nome = nome
